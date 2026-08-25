@@ -125,4 +125,30 @@ public class QuotesController : ControllerBase
         return Ok(response);
         
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteQuote(int id)
+    {
+        var quote = await _context.Quotes
+        .FirstOrDefaultAsync(q => q.Id == id);
+
+        if(quote == null)
+        {
+            return NotFound();
+        }
+
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var isAdmin = User.IsInRole(Roles.Admin);
+
+        if(quote.OwnerId != userId && !isAdmin)
+        {
+            return Forbid();
+        }
+        
+        _context.Quotes.Remove(quote);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+        
+    }
 }

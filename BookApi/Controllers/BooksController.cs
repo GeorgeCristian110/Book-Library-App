@@ -150,7 +150,6 @@ public class BooksController : ControllerBase
     public async Task<IActionResult> DeleteBook (int id)
     {
          var book = await _context.Books
-        .Include(b => b.Owner)
         .FirstOrDefaultAsync(b =>  b.Id == id);
 
         if(book == null)
