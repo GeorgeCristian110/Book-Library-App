@@ -82,4 +82,47 @@ public class QuotesController : ControllerBase
         return Ok(response);
 
     }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<QuoteResponse>> UpdateQuote(int id, QuoteUpdateRequest request)
+    {
+        var quote = await _context.Quotes
+        .Include(q => q.Owner)
+        .Include(q => q.Book)
+        .FirstOrDefaultAsync(q => q.Id == id);
+
+        if(quote == null)
+        {
+            return NotFound();
+        }
+
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var isAdmin = User.IsInRole(Roles.Admin);
+
+        if(quote.OwnerId != userId && !isAdmin)
+        {
+            return Forbid();
+        }
+
+        quote.Text = request.Text;
+        quote.Author = request.Author;
+        quote.BookId = request.BookId;
+
+        await _context.SaveChangesAsync();
+
+        Book? updatedBook = quote.BookId != null
+        ? await _context.Books.FindAsync(quote.BookId)
+        : null;
+
+        var response = new QuoteResponse
+        {
+          Id = quote.Id,
+          Text = quote.Text,
+          Author = quote.Author,
+          BookTitle = updatedBook?.Title
+        };
+
+        return Ok(response);
+        
+    }
 }
