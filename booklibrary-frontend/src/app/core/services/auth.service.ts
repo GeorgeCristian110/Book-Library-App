@@ -23,5 +23,16 @@ export class AuthService {
             })
         );
     }
+    
+    register(username : string, email: string, password: string){
+        return this.http.post<AuthResponse>('http://localhost:5222/api/Auth/register', 
+            {username, email, password})
+            .pipe(
+                tap((response : AuthResponse) => {
+                    this.tokenSignal.set(response.token);
+                    this.usernameSignal.set(response.username);
+                })
+            );
+    }
 }
 
