@@ -37,5 +37,10 @@ export class AuthService {
                 })
             );
     }
+
+    logout(){
+        this.tokenSignal.set(null);
+        this.usernameSignal.set(null);
+    }
 }
 
