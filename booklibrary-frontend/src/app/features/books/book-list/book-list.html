@@ -1,0 +1,21 @@
+<div class="container mt-4">
+    <h1 class="mb-4">Book List</h1>
+    <a routerLink="/books/new" class="btn btn-dark mb-3">
+        <i class="fa-solid fa-plus"></i>Add new book
+    </a>
+
+    <div class="list-group">
+        @for (book of books; track book.id){
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{book.title}}</strong>
+                    <span class="text-muted"> by {{ book.author }} ({{ book.publishedDate }})</span>
+                </div>
+                <div>
+                    <a [routerLink]="['/books', book.id, 'edit']" class="btn btn-sm btn-dark me-2">Edit</a>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -11,6 +11,9 @@ export class AuthService {
     private tokenSignal = signal<string | null>(null);
     private usernameSignal = signal<string | null>(null);
     readonly isLoggedIn = computed(() => this.tokenSignal() !== null);
+    getToken() {
+        return this.tokenSignal();
+    }
 
     private http = inject(HttpClient);
 
