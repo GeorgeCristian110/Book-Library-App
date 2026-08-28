@@ -14,3 +14,12 @@ export interface BookResponse {
     description: string | null;
     ownerUsername: string;
 }
+
+export interface QuoteResponse {
+    id: number;
+    text: string;
+    author: string | null;
+    ownerId: number;
+    bookId: number | null;
+    bookTitle: string | null;
+}
