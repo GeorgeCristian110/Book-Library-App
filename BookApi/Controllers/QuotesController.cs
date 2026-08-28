@@ -45,6 +45,32 @@ public class QuotesController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<QuoteResponse>> GetQuoteById(int id)
+    {
+        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+        var quote = await _context.Quotes
+            .Include(q => q.Book)
+            .FirstOrDefaultAsync(q => q.Id == id && q.OwnerId == userId);
+
+        
+        if(quote == null)
+        {
+            return NotFound();
+        }
+
+        var response = new QuoteResponse
+        {
+            Id = quote.Id,
+            Text = quote.Text,
+            Author = quote.Author,
+            BookTitle = quote.Book != null ? quote.Book.Title : null
+        };
+
+        return Ok(response);
+    }
+
     [HttpPost]
     public async Task<ActionResult<QuoteResponse>> CreateQuote(QuoteCreateRequest request)
     {
