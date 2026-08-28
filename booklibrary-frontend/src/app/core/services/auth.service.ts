@@ -7,10 +7,14 @@ import { tap } from 'rxjs';
     providedIn: 'root'
 })
 export class AuthService {
+    private readonly tokenKey = 'jwt_token';
+    private readonly usernameKey = 'username';
 
-    private tokenSignal = signal<string | null>(null);
-    private usernameSignal = signal<string | null>(null);
+    private tokenSignal = signal<string | null>(localStorage.getItem(this.tokenKey));
+    private usernameSignal = signal<string | null>(localStorage.getItem(this.usernameKey));
+   
     readonly isLoggedIn = computed(() => this.tokenSignal() !== null);
+    
     getToken() {
         return this.tokenSignal();
     }
@@ -27,6 +31,9 @@ export class AuthService {
             tap((response : AuthResponse) => {
                 this.tokenSignal.set(response.token);
                 this.usernameSignal.set(response.username);
+
+                localStorage.setItem(this.tokenKey, response.token);
+                localStorage.setItem(this.usernameKey, response.username);
             })
         );
     }
@@ -38,6 +45,9 @@ export class AuthService {
                 tap((response : AuthResponse) => {
                     this.tokenSignal.set(response.token);
                     this.usernameSignal.set(response.username);
+
+                    localStorage.setItem(this.tokenKey, response.token);
+                    localStorage.setItem(this.usernameKey, response.username);
                 })
             );
     }
@@ -45,6 +55,9 @@ export class AuthService {
     logout(){
         this.tokenSignal.set(null);
         this.usernameSignal.set(null);
+
+        localStorage.removeItem(this.tokenKey);
+        localStorage.removeItem(this.usernameKey);
     }
 }
 
