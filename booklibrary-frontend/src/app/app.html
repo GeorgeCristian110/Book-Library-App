@@ -1,13 +1,27 @@
 
-<nav class="navbar navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <div class="container">
         <a class="navbar-brand" routerLink="/books">Book Library</a>
 
         @if(authService.isLoggedIn()){
-            <div>
-                <a routerLink="/books" class="btn btn-outline-light btn-sm me-2">Books</a>
-                <a routerLink="/quotes" class="btn btn-outline-light btn-sm me-2">My Quotes</a>
-                <button (click)="logout()" class="btn btn-outline-light btn-sm">Logout</button>
+            <button 
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="ms-auto">
+                    <a routerLink="/books" class="btn btn-outline-light btn-sm me-2">Books</a>
+                    <a routerLink="/quotes" class="btn btn-outline-light btn-sm me-2">My quotes</a>
+                    <button (click)="logout()" class="btn btn-outline-light btn-sm">Logout</button>
+                </div>
             </div>
         }
     </div>
