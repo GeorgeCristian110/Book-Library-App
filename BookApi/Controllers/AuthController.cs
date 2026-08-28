@@ -36,6 +36,13 @@ public class AuthController : ControllerBase
             return Conflict("A user with this email is already registerd!");
         }
 
+        var existingUsername = await _context.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
+
+        if(existingUsername != null)
+        {
+            return Conflict("This username is already taken try again. ");
+        }
+
         var newUser = new User
         {
             Username = request.Username,
