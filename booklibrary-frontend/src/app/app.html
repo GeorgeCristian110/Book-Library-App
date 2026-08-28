@@ -1,7 +1,9 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <div class="container">
-        <a class="navbar-brand" routerLink="/books">Book Library</a>
+        <a class="navbar-brand" routerLink="/books">
+            <i class="fa-solid fa-book"></i> Book Library
+        </a>
 
         @if(authService.isLoggedIn()){
             <button 
@@ -20,7 +22,9 @@
                 <div class="ms-auto">
                     <a routerLink="/books" class="btn btn-outline-light btn-sm me-2">Books</a>
                     <a routerLink="/quotes" class="btn btn-outline-light btn-sm me-2">My quotes</a>
-                    <button (click)="logout()" class="btn btn-outline-light btn-sm">Logout</button>
+                    <button (click)="logout()" class="btn btn-outline-light btn-sm">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>   
                 </div>
             </div>
         }
