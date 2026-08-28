@@ -28,5 +28,15 @@ export class BookList implements OnInit{
     });
   }
 
+  deleteBook(id: number) {
+    if(confirm('Are you sure you want to delete this book? ')){
+      this.bookService.delete(id).subscribe({
+        next: () => {
+          this.books = this.books.filter(b => b.id !== id)
+        },
+      });
+    }
+  }
+
 }
 

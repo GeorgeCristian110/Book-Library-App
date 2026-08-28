@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <h1 class="mb-4">{{isEditMode ? 'Edit Book' :  'Add New Book'}}</h1>
+
+    <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" class="form-control" [(ngModel)]="title" name="title" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" id="author" class="form-control" [(ngModel)]="author" name="author" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="publishedDate" class="form-label">Published Date</label>
+            <input type="date" id="publishedDate" class="form-control" [(ngModel)]="publishedDate" name="publishedDate" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="genre" class="form-label">Genre</label>
+            <input type="text" id="genre" class="form-control" [(ngModel)]="genre" name="genre" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="text" id="description" class="form-control" [(ngModel)]="description" name="description"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Save</button>
+    </form>
+</div>

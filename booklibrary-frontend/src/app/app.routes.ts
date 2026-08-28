@@ -2,9 +2,14 @@ import { Routes } from '@angular/router';
 import { Login } from './features/login/login';
 import { Register } from './features/register/register';
 import { BookList } from './features/books/book-list/book-list';
+import { BookForm } from './features/books/book-form/book-form';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
+    {path: '', redirectTo: '/login', pathMatch: 'full' },
     {path : 'login', component : Login},
     {path : 'register', component : Register},
-    {path : "books", component: BookList},
+    {path : "books", component: BookList, canActivate: [authGuard]},
+    {path : 'books/new', component: BookForm, canActivate: [authGuard]},
+    {path : 'books/:id/edit', component: BookForm, canActivate: [authGuard]},
 ];

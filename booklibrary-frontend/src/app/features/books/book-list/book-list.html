@@ -10,10 +10,13 @@
                 <div>
                     <strong>{{book.title}}</strong>
                     <span class="text-muted"> by {{ book.author }} ({{ book.publishedDate }})</span>
+                    @if (book.description){
+                        <div class="text-muted small">{{ book.description }}</div>
+                    }
                 </div>
                 <div>
                     <a [routerLink]="['/books', book.id, 'edit']" class="btn btn-sm btn-dark me-2">Edit</a>
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <button (click)="deleteBook(book.id)" class="btn btn-sm btn-danger">Delete</button>
                 </div>
             </div>
         }
