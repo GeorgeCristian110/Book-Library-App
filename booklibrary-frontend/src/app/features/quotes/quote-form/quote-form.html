@@ -1,1 +1,17 @@
-<p>quote-form works!</p>
+<div class="container mt-4">
+    <h1 class="mb-4">{{isEditMode ? 'Edit Quote' : 'Add New Quote'}}</h1>
+
+    <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="text" class="form-label">Quote Text</label>
+            <textarea id="text" class="form-control" [(ngModel)]="text" name="text" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" id="author" class="form-control" [(ngModel)]="author" name="author" />
+        </div>
+
+        <button type="submit" class="btn btn-dark">Save</button>
+    </form>
+</div>

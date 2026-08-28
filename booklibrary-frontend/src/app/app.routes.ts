@@ -4,6 +4,8 @@ import { Register } from './features/register/register';
 import { BookList } from './features/books/book-list/book-list';
 import { BookForm } from './features/books/book-form/book-form';
 import { authGuard } from './core/guards/auth.guard';
+import { QuoteList } from './features/quotes/quote-list/quote-list';
+import { QuoteForm } from './features/quotes/quote-form/quote-form';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -12,4 +14,7 @@ export const routes: Routes = [
     {path : "books", component: BookList, canActivate: [authGuard]},
     {path : 'books/new', component: BookForm, canActivate: [authGuard]},
     {path : 'books/:id/edit', component: BookForm, canActivate: [authGuard]},
+    {path: 'quotes', component: QuoteList, canActivate: [authGuard]},
+    {path: 'quotes/new', component: QuoteForm, canActivate: [authGuard]},
+    {path: 'quotes/:id/edit', component: QuoteForm, canActivate: [authGuard]}
 ];

@@ -1,1 +1,27 @@
-<p>quote-list works!</p>
+<div class="container mt-4">
+    <h1 class="mb-4">My Quotes</h1>
+
+    <a routerLink="/quotes/new" class="btn btn-dark mb-3">
+        <i class="fa-solid fa-plus"></i> Add new quote
+    </a>
+
+    <div class="list-group">
+        @for(quote of quotes; track quote.id){
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <p class="mb-1 fst-italic">{{ quote.text }}</p>
+                <span class="text-muted">
+                        @if(quote.author) { - {{ quote.author }}}
+                        @if(quote.bookTitle) { (from {{ quote.bookTitle }}) }
+                </span>
+            </div>
+
+        <div>
+            <a [routerLink]="['/quotes', quote.id, 'edit']" class="btn btn-sm btn-dark me-2">Edit</a>
+            <button (click)="deleteQuote(quote.id)" class="btn btn-sm btn-danger">Delete</button>
+        </div>
+        
+        </div>
+        }
+    </div>
+</div>
