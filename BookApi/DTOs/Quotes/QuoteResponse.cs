@@ -7,4 +7,5 @@ public record QuoteResponse
     public required string Text {get ; set;}
     public string? Author {get ; set;}
     public string? BookTitle {get; set;}
+    public required string OwnerUsername {get; set;}
 }

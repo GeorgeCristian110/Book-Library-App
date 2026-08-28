@@ -24,20 +24,24 @@ export class BookForm implements OnInit {
   genre = '';
   description = '';
 
+
   ngOnInit(){
     const idParam = this.route.snapshot.paramMap.get('id');
 
     if(idParam){
       this.isEditMode = true;
       this.bookId = Number(idParam);
+   
 
       this.bookService.getById(this.bookId).subscribe({
         next: (book) => {
+          console.log('Book loaded from server:', book);
           this.title = book.title;
           this.author = book.author;
           this.publishedDate = book.publishedDate;
           this.genre = book.genre;
           this.description = book.description ?? '';
+
         },
       });
     }

@@ -12,14 +12,26 @@
             <input type="text" id="author" class="form-control" [(ngModel)]="author" name="author" required />
         </div>
 
-        <div class="mb-3">
+         <div class="mb-3">
             <label for="publishedDate" class="form-label">Published Date</label>
             <input type="date" id="publishedDate" class="form-control" [(ngModel)]="publishedDate" name="publishedDate" required />
         </div>
 
-        <div class="mb-3">
+       <div class="mb-3">
             <label for="genre" class="form-label">Genre</label>
-            <input type="text" id="genre" class="form-control" [(ngModel)]="genre" name="genre" required />
+            <select id="genre" class="form-control" [(ngModel)]="genre" name="genre" required>
+                <option value="" disabled>Select a genre</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Mystery">Mystery</option>
+                <option value="SciFi">SciFi</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Biography">Biography</option>
+                <option value="History">History</option>
+                <option value="Romance">Romance</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Horror">Horror</option>
+            </select>
         </div>
 
         <div class="mb-3">

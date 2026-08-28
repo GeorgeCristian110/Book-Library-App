@@ -1,9 +1,10 @@
 import { Component, inject , OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../../core/services/book.service';
 import { BookResponse } from '../../../core/models';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-book-list',
@@ -13,7 +14,7 @@ import { BookResponse } from '../../../core/models';
 })
 export class BookList implements OnInit{
   private bookService = inject(BookService);
-  private router = inject(Router);
+  private authService = inject(AuthService)
   
   books: BookResponse[] = [];
 
@@ -36,6 +37,10 @@ export class BookList implements OnInit{
         },
       });
     }
+  }
+
+  isOwner(ownerUsername: string) : boolean {
+    return this.authService.getUsername() === ownerUsername;
   }
 
 }

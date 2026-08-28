@@ -15,6 +15,10 @@ export class AuthService {
         return this.tokenSignal();
     }
 
+    getUsername(){
+        return this.usernameSignal();
+    }
+
     private http = inject(HttpClient);
 
     login(email: string, password:string){

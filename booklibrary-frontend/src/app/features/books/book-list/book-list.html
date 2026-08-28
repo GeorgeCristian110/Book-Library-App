@@ -1,7 +1,11 @@
 <div class="container mt-4">
-    <h1 class="mb-4">Book List</h1>
-    <a routerLink="/books/new" class="btn btn-dark mb-3">
-        <i class="fa-solid fa-plus"></i>Add new book
+
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+
+    <h4 class="mb-4 fw-bold text-dark">Book List</h4>
+    
+    <a routerLink="/books/new" class="btn btn-dark mb-4 px-4 py-2 rounded-pill shadow-sm">
+        <i class="fa-solid fa-plus me-2"></i>Add new book
     </a>
 
     <div class="list-group">
@@ -15,6 +19,7 @@
                         <div class="text-muted small">{{ book.description }}</div>
                     }
                 </div>
+                @if (isOwner(book.ownerUsername)) {
                 <div>
                     <a [routerLink]="['/books', book.id, 'edit']" class="btn btn-sm btn-dark me-2">
                         <i class="fa-solid fa-pen"></i> Edit
@@ -23,7 +28,11 @@
                         <i class="fa-solid fa-trash"></i> Delete
                     </button>
                 </div>
+                }
             </div>
         }
+    </div>
+
+
     </div>
 </div>

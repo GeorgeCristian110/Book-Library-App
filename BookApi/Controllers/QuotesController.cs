@@ -31,6 +31,7 @@ public class QuotesController : ControllerBase
         
         var quotes = await _context.Quotes
         .Include(q => q.Book)
+        .Include(q => q.Owner)
         .Where(q => q.OwnerId == userId)
         .ToListAsync();
 
@@ -39,6 +40,7 @@ public class QuotesController : ControllerBase
            Id = q.Id,
            Text = q.Text,
            Author = q.Author,
+           OwnerUsername = q.Owner!.Username,
            BookTitle = q.Book != null ?  q.Book.Title : null
         });
 
@@ -52,6 +54,7 @@ public class QuotesController : ControllerBase
 
         var quote = await _context.Quotes
             .Include(q => q.Book)
+            .Include(q => q.Owner)
             .FirstOrDefaultAsync(q => q.Id == id && q.OwnerId == userId);
 
         
@@ -65,6 +68,7 @@ public class QuotesController : ControllerBase
             Id = quote.Id,
             Text = quote.Text,
             Author = quote.Author,
+            OwnerUsername = quote.Owner!.Username,
             BookTitle = quote.Book != null ? quote.Book.Title : null
         };
 
@@ -95,12 +99,14 @@ public class QuotesController : ControllerBase
             book = await _context.Books.FindAsync(request.BookId);
         } 
         
-
+        var owner = await _context.Users.FindAsync(userId);
+    
         var response = new QuoteResponse
         {
             Id = quote.Id,
             Text = quote.Text,
             Author = quote.Author,
+            OwnerUsername = owner!.Username,
             BookTitle = book != null ? book.Title : null
 
         };
@@ -145,6 +151,7 @@ public class QuotesController : ControllerBase
           Id = quote.Id,
           Text = quote.Text,
           Author = quote.Author,
+          OwnerUsername = quote.Owner!.Username,
           BookTitle = updatedBook?.Title
         };
 
