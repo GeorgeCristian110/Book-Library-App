@@ -1,3 +1,5 @@
+export const API_BASE_URL = 'https://booklikbrary-api-czawd8hjfxcxd4ej.swedencentral-01.azurewebsites.net'
+
 export interface AuthResponse {
     id : number;
     username: string;
