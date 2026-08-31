@@ -1,8 +1,7 @@
-# Build output
+
 **/bin/
 **/obj/
 
-# Local database (contains your test data, shouldn't be shared)
 *.db
 *.db-shm
 *.db-wal
@@ -11,6 +10,8 @@
 .vs/
 .vscode/
 
-# Postman local config (not needed in the repo)
+
 .postman/
 postman/
+
+publish/
